@@ -1,13 +1,11 @@
 package dev.aagun.ediindonesia.user;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,16 +19,20 @@ import lombok.NoArgsConstructor;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq_gen")
-    @SequenceGenerator(name = "users_seq_gen", sequenceName = "users_seq", allocationSize = 1, initialValue = 1)
-    @Column(name = "userid")
-    private Integer id;
+    @Column(nullable = false)
+    @NotNull(message = "userid is required")
+    private Integer userid;
 
-    @Column(name = "namalengkap")
-    private String fullName;
+    @Column(nullable = false)
+    @NotBlank(message = "namalengkap is required")
+    private String namalengkap;
 
+    @Column(nullable = false)
+    @NotBlank(message = "username is required")
     private String username;
 
+    @Column(nullable = false)
+    @NotBlank(message = "password is required")
     private String password;
 
     private char status;
