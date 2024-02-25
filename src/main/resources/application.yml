@@ -9,7 +9,14 @@ spring:
     database: postgresql
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: validate
     properties:
       hibernate:
         format_sql: true
+
+  flyway:
+    url: jdbc:postgresql://localhost:5432/technical_test_db
+    user: developer
+    password: developer
+    baseline-on-migrate: true
+    locations: classpath:db/migration
