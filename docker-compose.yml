@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  postgresql:
+    container_name: technical_test
+    image: "postgres:12-alpine"
+    environment:
+      POSTGRES_USER: developer
+      POSTGRES_PASSWORD: developer
+      POSTGRES_DB: technical_test_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - "./docker/postgresql/volumes/data"
+    networks:
+      - backend
+
+networks:
+  backend:
