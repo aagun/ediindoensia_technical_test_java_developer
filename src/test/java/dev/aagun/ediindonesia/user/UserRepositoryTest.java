@@ -52,11 +52,9 @@ class UserRepositoryTest {
         Optional<User> optionalUser = underTest.findById(userId);
         assertThat(optionalUser)
                 .isPresent()
-                .hasValueSatisfying(c -> {
-                    assertThat(c)
+                .hasValueSatisfying(c -> assertThat(c)
                             .usingRecursiveComparison()
-                            .isEqualTo(user);
-                });
+                            .isEqualTo(user));
     }
 
     @Test
