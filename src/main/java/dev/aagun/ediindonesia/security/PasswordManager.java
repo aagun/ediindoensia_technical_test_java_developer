@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class PasswordManager {
 
     public String hashPw(String password) throws NoSuchAlgorithmException {
-        return this.hashPw(16, password);
+        return this.hashPw(10, password);
     }
 
     public String hashPw(int rounds, String password) throws NoSuchAlgorithmException {

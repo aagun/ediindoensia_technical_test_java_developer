@@ -2,14 +2,15 @@ package dev.aagun.ediindonesia.user;
 
 import dev.aagun.ediindonesia.security.PasswordManager;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService {
 
     private final UserRepository userRepository;
@@ -25,7 +26,7 @@ public class UserService {
     }
 
     public void setDataUser(User request) throws NoSuchAlgorithmException {
-        String hashedPassword  = passwordManager.hashPw(request.getPassword());
+        String hashedPassword = passwordManager.hashPw(request.getPassword());
 
         User newUser = User.builder()
                 .userid(request.getUserid())
@@ -36,5 +37,12 @@ public class UserService {
                 .build();
 
         userRepository.save(newUser);
+    }
+
+    public void delDataUser(Integer userId) {
+        userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        userRepository.deleteById(userId);
     }
 }

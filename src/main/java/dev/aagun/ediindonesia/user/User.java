@@ -1,5 +1,9 @@
 package dev.aagun.ediindonesia.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -17,6 +21,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
+@JacksonXmlRootElement(localName = "user")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
     @Id
     @Column(nullable = false)
@@ -27,7 +33,7 @@ public class User {
     @NotBlank(message = "namalengkap is required")
     private String namalengkap;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     @NotBlank(message = "username is required")
     private String username;
 
