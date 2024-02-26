@@ -23,7 +23,15 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping(consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_XML_VALUE)
+    @PostMapping(
+            consumes = {
+                    MediaType.APPLICATION_XML_VALUE,
+                    MediaType.APPLICATION_JSON_VALUE
+            },
+            produces = {
+                    MediaType.APPLICATION_XML_VALUE,
+                    MediaType.APPLICATION_JSON_VALUE
+            })
     public ResponseEntity<UserResponse<Object>> setDataUser(@RequestBody User user)
             throws NoSuchAlgorithmException {
 
