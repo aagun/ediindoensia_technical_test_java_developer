@@ -4,25 +4,21 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
-
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 
 @Builder
 @NoArgsConstructor
 @Configuration
 public class PasswordManager {
 
-    public String hashPw(String password) throws NoSuchAlgorithmException {
+    public String hashPw(String password) {
         return this.hashPw(10, password);
     }
 
-    public String hashPw(int rounds, String password) throws NoSuchAlgorithmException {
+    public String hashPw(int rounds, String password) {
         return BCrypt.withDefaults().hashToString(rounds, password.toCharArray());
     }
 
-    public boolean verify(String password, String hashedPassword) throws NoSuchAlgorithmException {
+    public boolean verify(String password, String hashedPassword) {
         BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), hashedPassword);
         return result.verified;
     }
